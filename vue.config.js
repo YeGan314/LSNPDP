@@ -10,6 +10,7 @@ function resolve(dir) {
   return path.join(__dirname, dir);
 }
 const { defineConfig } = require("@vue/cli-service");
+const geoserverTarget = process.env.GEOSERVER_PROXY_TARGET || 'http://8.146.208.20';
 module.exports = defineConfig({
   publicPath: "/",
   chainWebpack: (config) => {
@@ -46,12 +47,12 @@ module.exports = defineConfig({
   transpileDependencies: [],
   // 开发服务器配置
   devServer: {
-    port: 3001, // 前端与 GeoServer 8080 分开；LSNPDP_NEW 使用 3001 避开现有 3000 进程
+    port: 3001,
     host: '0.0.0.0', // 允许外部访问
     proxy: {
       // 代理 GeoServer 请求，解决跨域问题
       '/geoserver': {
-        target: 'http://127.0.0.1:8080',
+        target: geoserverTarget,
         changeOrigin: true,
         secure: false,
         ws: false,  // 关闭 websocket，WMS 不需要
@@ -60,7 +61,7 @@ module.exports = defineConfig({
         },
         onProxyReq: function(proxyReq, req, res) {
           console.log('📤 [代理请求]', req.method, req.url);
-          console.log('📤 [目标地址]', 'http://127.0.0.1:8080' + req.url);
+          console.log('📤 [目标地址]', geoserverTarget + req.url);
 
           // 添加 GeoServer 认证信息 (如果需要)
           // const auth = Buffer.from('admin:geoserver').toString('base64');
@@ -74,7 +75,7 @@ module.exports = defineConfig({
         onError: function(err, req, res) {
           console.error('❌ [代理错误]', err.code, err.message);
           console.error('❌ [请求URL]', req.url);
-          console.error('❌ [目标服务器]', 'http://127.0.0.1:8080');
+          console.error('❌ [目标服务器]', geoserverTarget);
 
           // 返回友好的错误信息
           res.writeHead(502, {
@@ -85,8 +86,8 @@ module.exports = defineConfig({
             message: err.message,
             code: err.code,
             url: req.url,
-            target: 'http://127.0.0.1:8080',
-            suggestion: '请检查: 1) GeoServer 是否启动 2) 网络连接 3) 防火墙设置'
+            target: geoserverTarget,
+            suggestion: '请检查阿里云 GeoServer 是否可访问'
           }));
         }
       }

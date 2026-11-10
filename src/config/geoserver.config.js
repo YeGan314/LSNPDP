@@ -6,10 +6,8 @@
 
 export const GEOSERVER_CONFIG = {
   // 基础 URL 配置
-  // 开发环境使用代理路径（避免跨域），生产环境直连
-  baseUrl: process.env.NODE_ENV === 'production' 
-    ? (process.env.VUE_APP_GEOSERVER_BASE_URL || 'http://localhost:8080/geoserver')
-    : '/geoserver',
+  // 同域代理避免浏览器跨域；生产环境也需将 /geoserver 转发到阿里云
+  baseUrl: process.env.VUE_APP_GEOSERVER_BASE_URL || '/geoserver',
   
   // 工作空间
   workspace: 'LSNPDP',
