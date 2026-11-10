@@ -14,7 +14,9 @@
 
 ## 运行
 
-前端依赖和启动命令见 `package.json`：先执行 `npm ci`，再执行 `npm run serve`；构建执行 `npm run build`。本目录开发端口为 3001，本地 GeoServer 为 8080。本地数据库、图层和端口说明见 `docs/本地GeoServer部署记录.md`。
+前端依赖和启动命令见 `package.json`：先执行 `npm ci`，再执行 `npm run serve`；构建执行 `npm run build`。开发端口为 3001，`/geoserver` 默认代理到阿里云 GeoServer `http://8.146.208.20`。
+
+阿里云部署地址为 `http://8.146.208.20/lsnpdp/`。部署构建命令为 `VUE_APP_PUBLIC_PATH=/lsnpdp/ npm run build`，Nginx 子路径配置见 `deploy/nginx-lsnpdp.conf`；服务器现有 `/geoserver/` 代理供页面使用。
 
 气象处理后端及其 Docker Compose 配置已移除。监测、企业、水质和地图图层继续通过远程 GeoServer 获取；前端现有高德天气功能保留。清理记录见 `docs/database-audit/气象服务清理记录.md`。
 

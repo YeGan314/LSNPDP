@@ -12,7 +12,7 @@ function resolve(dir) {
 const { defineConfig } = require("@vue/cli-service");
 const geoserverTarget = process.env.GEOSERVER_PROXY_TARGET || 'http://8.146.208.20';
 module.exports = defineConfig({
-  publicPath: "/",
+  publicPath: process.env.VUE_APP_PUBLIC_PATH || "/",
   chainWebpack: (config) => {
     config.resolve.alias.set("@", resolve("./src"));
   },
