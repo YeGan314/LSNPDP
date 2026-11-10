@@ -1,0 +1,30 @@
+
+@font-face {
+  font-family: 'DS-DIGIT';
+  src: url('./font/DS-DIGIT.TTF');
+}
+
+@font-face {
+  font-family: Tencent;
+  src: url('https://test-1258290170.cos.ap-guangzhou.myqcloud.com/font/TencentSans-W7.otf');font-display: swap;
+}
+
+@font-face {
+  font-family: Oppo;
+  src: url('https://test-1258290170.cos.ap-guangzhou.myqcloud.com/font/OPPO%20Sans-Regular.ttf');font-display: swap;
+}
+
+@font-face {
+  font-family: HuXiaoBo-NanShen;
+  src: url('https://test-1258290170.cos.ap-guangzhou.myqcloud.com/font/nanshen.otf');font-display: swap;
+}
+
+@font-face {
+  font-family: SJyunhei;
+  src: url('https://test-1258290170.cos.ap-guangzhou.myqcloud.com/font/%E4%B8%89%E6%9E%81%E9%9F%B5%E9%BB%91%E7%AE%80%E4%BD%93.ttf');font-display: swap;
+}
+
+@font-face {
+  font-family: Ding;
+  src: url('./font/DS-DIGI.TTF');font-display: swap;
+}
