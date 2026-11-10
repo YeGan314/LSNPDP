@@ -236,7 +236,6 @@ export default defineComponent({
     const selectedSiteName = ref("");
 
     let hsqBufferLayer = null;
-    let xjlyDemLayer = null;
     let idleTimer = null;
     let autoSwitchTimer = null;
 
@@ -641,22 +640,6 @@ export default defineComponent({
         return;
       }
 
-      if (value === "xjlyDem") {
-        if (check) {
-          if (!xjlyDemLayer) {
-            xjlyDemLayer = initWMSService({
-              url: `${GEOSERVER_CONFIG.baseUrl}/LSNPDP/wms`,
-              layers: "LSNPDP:xjly_dem",
-              parameters: { transparent: true, format: "image/png" },
-              alpha: 0.8,
-            });
-          } else {
-            xjlyDemLayer.show = true;
-          }
-        } else if (xjlyDemLayer) {
-          xjlyDemLayer.show = false;
-        }
-      }
     };
 
     const loadEntity = () => {
@@ -700,10 +683,6 @@ export default defineComponent({
         if (hsqBufferLayer) {
           viewer.imageryLayers.remove(hsqBufferLayer);
           hsqBufferLayer = null;
-        }
-        if (xjlyDemLayer) {
-          viewer.imageryLayers.remove(xjlyDemLayer);
-          xjlyDemLayer = null;
         }
       }
     });
